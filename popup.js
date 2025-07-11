@@ -18,16 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // 加载数据
   function loadData() {
     chrome.storage.local.get('attendanceCache', function(res) {
+      if(!res.attendanceCache) {
+        console.log('No attendanceCache found')
+         dayOts.innerHTML  = `<li class="ot-info">暂无数据，请进入北森系统</li>`;
+        return
+      }
       updateUI(res.attendanceCache)
     });
 
   }
   // 更新UI
   function updateUI(attendanceCache) {
-    if(attendanceCache) {
-      console.log('attendanceCache', attendanceCache)
-      return
-    }
     overtimeHours.innerText = `${attendanceCache.ot.toFixed(2)} 小时`
     dateLabel.innerText = attendanceCache.tiemCache
     let list =""
