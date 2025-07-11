@@ -74,8 +74,8 @@ function getOt(DateTypeValue,startTimeText, endTimeText) {
   const endDate = dayjs(endTimeText);
   const diffMinutes = endDate.diff(startDate, 'minute');
   const workMinutes = Math.max(0, diffMinutes - 60); // 扣除午休1小时
-  res.workHours = parseFloat((workMinutes / 60).toFixed(2));
-  res.Ot = isWeekend ? Math.min(Math.floor(res.workHours),8) : Math.max(0, (res.workHours - 8).toFixed(2));
+  res.workHours = parseFloat((workMinutes / 60));
+  res.Ot = isWeekend ? Math.min(Math.floor(res.workHours),8) : Math.max(0, (res.workHours - 8));
   return res
 }
 
