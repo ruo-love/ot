@@ -34,9 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let list =""
     attendanceCache.data.forEach(item=>{
       const tip = item.tips?` @${item.tips}`:''
-      const isWeekend = ['公休日','节假日'].includes(item.DateTypeValue);
-      const isWeekendOt = isWeekend && item.Ot > 0;
-      list += `<li class="ot-info ${isWeekend&&'isWeekend'} ${isWeekendOt&&'isWeekendOt'}">${item.SwipingCardDate}(${item.DateTypeValue})：加班${item.Ot}小时${tip}</li>`
+      const isWeekend = ['公休日','节假日'].includes(item.DateTypeValue)&&'isWeekend';
+      const isWeekendOt = isWeekend && item.Ot > 0&&'isWeekendOt';
+      const isRemark = item.RetroactiveRemark.length > 0 && 'isRemark';
+      list += `<li class="ot-info ${isWeekend} ${isWeekendOt} ${isRemark}">${item.SwipingCardDate}(${item.DateTypeValue})：加班${item.Ot}小时${tip}</li>`
     })
     dayOts.innerHTML = list
     let current = attendanceCache.ot/maxHours * 100;
