@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   // 更新UI
   function updateUI(attendanceCache) {
+    if(attendanceCache) {
+      console.log('attendanceCache', attendanceCache)
+      return
+    }
     overtimeHours.innerText = `${attendanceCache.ot.toFixed(2)} 小时`
     dateLabel.innerText = attendanceCache.tiemCache
     let list =""
