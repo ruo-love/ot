@@ -70,7 +70,7 @@ function getOt(DateTypeValue,startTimeText, endTimeText,RetroactiveRemark) {
   if(RetroactiveRemark.length>0){
     res.tips += `补卡：${RetroactiveRemark.join('---')}`;
   }
-  if(isWeekend&&startTimeText=='上班未打卡'&&endTimeText=='下班未打卡'){
+  if(isWeekend&&startTimeText=='上班未打卡'||isWeekend&&endTimeText=='下班未打卡'){
     return res;
   }
   if(DateTypeValue == '工作日' && startTimeText=='上班未打卡'){
@@ -86,8 +86,7 @@ function getOt(DateTypeValue,startTimeText, endTimeText,RetroactiveRemark) {
   const diffMinutes = endDate.diff(startDate, 'minute');
   const workMinutes = Math.max(0, diffMinutes - 60); // 扣除午休1小时
   res.workHours = parseFloat((workMinutes / 60));
-  const _Ot = isWeekend ? Math.min(Math.floor(res.workHours),8) : Math.max(0, (res.workHours - 8).toFixed(2));
-  res.Ot = _Ot||0;
+  res.Ot = isWeekend ? Math.min(Math.floor(res.workHours),8) : Math.max(0, (res.workHours - 8).toFixed(2));
   return res
 }
 
