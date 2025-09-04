@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const tip = item.tips?` @${item.tips}`:''
       const isWeekend = ['公休日','节假日'].includes(item.DateTypeValue)&&'isWeekend';
       const isWeekendOt = isWeekend && item.Ot > 0&&'isWeekendOt';
-      const isRemark = item.RetroactiveRemark.length > 0 && 'isRemark';
-      list += `<li class="ot-info ${isWeekend} ${isWeekendOt} ${isRemark}">${item.SwipingCardDate}(${item.DateTypeValue})：加班${item.Ot}小时${tip}</li>`
+      const isWarn = item.warn && 'isWarn';
+      list += `<li class="ot-info ${isWeekend} ${isWeekendOt} ${isWarn}">${item.SwipingCardDate}(${item.DateTypeValue})：加班${item.Ot}小时${tip}</li>`
     })
     dayOts.innerHTML = list
     let current = attendanceCache.ot/maxHours * 100;

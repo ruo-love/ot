@@ -33,6 +33,7 @@ function parseAttendanceData(rawData) {
     datas.forEach((item)=>{
       const DateTypeValue = item.DateType.text // 公休日、工作日、节假日
       const RetroactiveRemarkText = getValue(item,'RetroactiveRemark.value','') // 补卡备注
+      const warn = RetroactiveRemarkText.length > 0 // 是否有备注
       const matchs = RetroactiveRemarkText.match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}/g);
       const RetroactiveRemark = matchs ? matchs : [];
       const [firstRetroactiveRemark,lastRetroactiveRemark] = RetroactiveRemark;
@@ -51,6 +52,7 @@ function parseAttendanceData(rawData) {
         SwipingCardDate,
         Ot,
         workHours,
+        warn,
         tips
       }
       attendanceCache.ot+=Ot
